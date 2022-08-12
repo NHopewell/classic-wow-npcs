@@ -30,7 +30,7 @@ class NPC(db.Model):
     health = db.Column(db.Integer, nullable=False)
     damage = db.Column(db.Integer, nullable=False)
     armor = db.Column(db.Integer, nullable=False)
-    background = db.Column(db.text())
+    background = db.Column(db.Text)
 
 
 
