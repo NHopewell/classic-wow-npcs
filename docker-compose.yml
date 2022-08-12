@@ -19,7 +19,7 @@ services:
 
   api-db:
     build:
-      context: ./src/db
+      context: ./classic_wow_npcs/db
       dockerfile: Dockerfile
     expose:
       - 5432
