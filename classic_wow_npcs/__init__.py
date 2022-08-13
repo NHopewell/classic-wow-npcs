@@ -19,27 +19,27 @@ app.config.from_object(app_settings)
 # instatiate the db
 db = SQLAlchemy(app)
 
-class NPC(db.Model):
-    __tablename__ = 'npcs'
+def create_app(script_info=None):
+    """An application factory, 
+    as explained here: https://flask.palletsprojects.com/en/2.2.x/patterns/appfactories/
+    """
+    # instantiate the app
+    app = Flask(__name__)
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.String(128), nullable=False)
-    level = db.Column(db.Integer, nullable=False)
-    faction = db.Column(db.String(128), nullable=False)
-    location = db.Column(db.String(128), nullable=False)
-    health = db.Column(db.Integer, nullable=False)
-    damage = db.Column(db.Integer, nullable=False)
-    armor = db.Column(db.Integer, nullable=False)
-    background = db.Column(db.Text)
+    # set config
+    app_settings = os.getenv("APP_SETTINGS")
+    app.config.from_object(app_settings)
 
+    # set up extensions
+    db.init_app(app)
 
+    # register blueprints
+    from classic_wow_npcs.api.ping import ping_blueprint
+    app.register_blueprint(ping_blueprint)
 
-class Ping(Resource):
-    def get(self):
-        return {
-            'status': 'success',
-            'message': 'ping pong!'
-        }
+    # shell context for flask cli
+    @app.shell_context_processor
+    def ctx():
+        return {"app": app, "db": db}
 
-
-api.add_resource(Ping, '/ping')
+    return app
