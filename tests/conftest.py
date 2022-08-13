@@ -1,10 +1,11 @@
 import pytest
 
-from classic_wow_npcs import app, db
+from classic_wow_npcs import create_app, db
 
 
 @pytest.fixture(scope='module')
 def test_app():
+    app = create_app()
     app.config.from_object('classic_wow_npcs.config.TestingConfig')
     with app.app_context():
         yield app 
