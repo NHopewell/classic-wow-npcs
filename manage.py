@@ -1,9 +1,11 @@
 from flask.cli import FlaskGroup
 
-from classic_wow_npcs import app, db
+from classic_wow_npcs import create_app, db
+from classic_wow_npcs.api.models import NPC
 
 
-cli = FlaskGroup(app)
+app = create_app()
+cli = FlaskGroup(create_app=create_app)
 
 
 @cli.command('recreate_db')
