@@ -14,7 +14,9 @@ class NPC(db.Model):
     armor = db.Column(db.Integer, nullable=False)
     background = db.Column(db.Text)
 
-    def __init__(self, name, level, faction, health, damage, armor, background):
+    def __init__(
+        self, name, level, faction, health, damage, armor, background
+    ):
         self.name = name
         self.level = level
         self.faction = faction
