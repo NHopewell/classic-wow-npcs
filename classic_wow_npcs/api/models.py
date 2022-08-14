@@ -2,6 +2,11 @@ from classic_wow_npcs import db
 
 
 class NPC(db.Model):
+    """SQLAlchemy Model for the NPCs table.
+
+    Note that in this project, a location does not reference
+    another model, it is simply a string for a location in Azeroth.
+    """
     __tablename__ = "npcs"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
