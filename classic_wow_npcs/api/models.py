@@ -2,7 +2,7 @@ from classic_wow_npcs import db
 
 
 class NPC(db.Model):
-    __tablename__ = 'npcs'
+    __tablename__ = "npcs"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(128), nullable=False)
@@ -22,4 +22,3 @@ class NPC(db.Model):
         self.damage = damage
         self.armor = armor
         self.background = background
-        
